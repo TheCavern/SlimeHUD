@@ -22,12 +22,12 @@ public class HudBuilder {
      */
     @Nonnull
     public static String formatEnergyStored(int energy) {
-        return HudBuilder.getAbbreviatedNumber(energy) + " J Stored";
+        return HudBuilder.getAbbreviatedNumber(energy) + " J 已存储";
     }
 
     /**
      * Formats stored energy and total energy
-     * 
+     *
      * @param energy Amount of stored energy
      * @return The formatted text
      */

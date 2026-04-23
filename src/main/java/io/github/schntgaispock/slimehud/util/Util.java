@@ -36,7 +36,7 @@ public class Util {
         barColorRGBMap.put(new RGB(0xff, 0xff, 0xff), BarColor.WHITE);
         barColorRGBMap.put(new RGB(0xb9, 0xb9, 0x00), BarColor.YELLOW);
     }
-    
+
     public static BarColor pickBarColorFromName(String name) {
         char colorCode = name.trim().toLowerCase().startsWith("§") ? name.charAt(1) : ' ';
         if (colorCode == 'x') {
@@ -50,7 +50,7 @@ public class Util {
 
                 if (savedBarColors.containsKey(rgb)) {
                     return savedBarColors.get(rgb);
-                } 
+                }
 
                 BarColor color = barColorRGBMap.get(Collections.min(barColorRGBMap.keySet(), (RGB a, RGB b) -> {
                     return (errorSquared(a.asArray(), rgb.asArray()) < errorSquared(b.asArray(), rgb.asArray())) ? -1 : 1;
@@ -84,7 +84,7 @@ public class Util {
                 return BarColor.WHITE;
         
             default:
-                SlimeHUD.log(Level.WARNING, "[SlimeHUD] Invalid bossbar color: " + color, "[SlimeHUD] Setting color to white...");
+                SlimeHUD.log(Level.WARNING, "[SlimeHUD] 无效的 BossBar 颜色: " + color, "[SlimeHUD] 将使用默认的白色...");
                 return BarColor.WHITE;
         }
     }

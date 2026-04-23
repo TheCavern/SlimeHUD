@@ -1,11 +1,11 @@
 package io.github.schntgaispock.slimehud;
 
-
 import javax.annotation.Nonnull;
 
 import io.github.schntgaispock.slimehud.placeholder.PlaceholderManager;
 import io.github.schntgaispock.slimehud.translation.TranslationManager;
 import io.github.schntgaispock.slimehud.waila.HudController;
+import net.guizhanss.guizhanlibplugin.updater.GuizhanUpdater;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
 import org.bukkit.NamespacedKey;
@@ -14,7 +14,6 @@ import io.github.mooy1.infinitylib.core.AbstractAddon;
 import io.github.mooy1.infinitylib.core.AddonConfig;
 import io.github.schntgaispock.slimehud.command.CommandManager;
 import io.github.schntgaispock.slimehud.waila.WAILAManager;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.updater.BlobBuildUpdater;
 import lombok.Getter;
 
 public class SlimeHUD extends AbstractAddon {
@@ -25,9 +24,8 @@ public class SlimeHUD extends AbstractAddon {
     private TranslationManager translationManager;
 
     public SlimeHUD() {
-        super("SchnTgaiSpock", "SlimeHUD", "master", "options.auto-update");
+        super("SlimefunGuguProject", "SlimeHUD", "master", "options.auto-update");
     }
-
 
     @Override
     public void enable() {
@@ -37,16 +35,7 @@ public class SlimeHUD extends AbstractAddon {
         getLogger().info("#    SlimeHUD by SchnTgaiSpock    #");
         getLogger().info("#=================================#");
 
-        if (getConfig().getBoolean("options.auto-update")) {
-            if (getDescription().getVersion().startsWith("Dev - ")) {
-                new BlobBuildUpdater(this, getFile(), "SlimeHUD", "Dev").start();
-            } else {
-                getLogger().info("This is an unofficial build of SlimeHUD, so auto updates are disabled!");
-                getLogger().info("You can download the official build here: https://blob.build/project/SlimeHUD");
-            }
-        }
-
-        final Metrics metrics = new Metrics(this, 15883);
+        Metrics metrics = new Metrics(this, 15883);
         metrics.addCustomChart(
             new SimplePie("disabled", () -> {
                 return "" + getConfig().getBoolean("waila.disabled");
@@ -65,6 +54,10 @@ public class SlimeHUD extends AbstractAddon {
         PlaceholderManager.setup();
         hudController = new HudController();
         translationManager = new TranslationManager();
+
+        if (getConfig().getBoolean("options.auto-update") && getDescription().getVersion().startsWith("Build")) {
+            GuizhanUpdater.start(this, getFile(), "SlimefunGuguProject", "SlimeHUD", "master");
+        }
     }
 
     @Override

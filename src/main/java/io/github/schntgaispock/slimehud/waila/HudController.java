@@ -1,5 +1,6 @@
 package io.github.schntgaispock.slimehud.waila;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
 import io.github.schntgaispock.slimehud.SlimeHUD;
 import io.github.schntgaispock.slimehud.util.HudBuilder;
 import io.github.schntgaispock.slimehud.util.Util;
@@ -65,7 +66,7 @@ public class HudController {
 
         Network en = EnergyNet.getNetworkFromLocation(request.getLocation());
         int size = getNetworkSize(en);
-        return size < 0 ? "" : "Network Size: " + HudBuilder.getCommaNumber(size);
+        return size < 0 ? "" : "能源网络大小: " + HudBuilder.getCommaNumber(size);
     }
 
     @Nonnull
@@ -99,7 +100,7 @@ public class HudController {
         MachineOperation operation = machine.getMachineProcessor().getOperation(request.getLocation());
 
         if (operation == null) {
-            hudText.append("Idle");
+            hudText.append("空闲");
             if (request.getSlimefunItem() instanceof EnergyNetComponent) {
                 hudText.append(" ").append(processCapacitor(request));
             }
@@ -108,9 +109,9 @@ public class HudController {
 
         int progress = operation.getProgress();
         int total = operation.getTotalTicks();
-        
+
         hudText.append(HudBuilder.formatProgressBar(progress, total));
-        
+
         if (request.getSlimefunItem() instanceof AGenerator) {
             hudText.append(" ").append(processGenerator(request));
         }
@@ -131,7 +132,7 @@ public class HudController {
         if (generation > 0) {
             hudText.append(HudBuilder.formatEnergyGenerated(generation));
         } else {
-            hudText.append("Not generating");
+            hudText.append("不在发电");
         }
 
         if (gen instanceof EnergyNetComponent) {
@@ -151,11 +152,11 @@ public class HudController {
 
         SolarGenerator gen = (SolarGenerator) request.getSlimefunItem();
         // Solar Generators dont use any fuel, so it's ok to call getGeneratedOutput
-        int generation = gen.getGeneratedOutput(request.getLocation(), null);
+        int generation = gen.getGeneratedOutput(request.getLocation(), (SlimefunBlockData) null);
         if (generation > 0) {
             hudText.append(HudBuilder.formatEnergyGenerated(generation));
         } else {
-            hudText.append("Not generating");
+            hudText.append("不在发电");
         }
 
         if (gen instanceof EnergyNetComponent) {
@@ -172,7 +173,7 @@ public class HudController {
         }
         CargoNode cn = (CargoNode) request.getSlimefunItem();
         int channel = cn.getSelectedChannel(request.getLocation().getBlock()) + 1;
-        return "Channel: " + Util.getColorFromCargoChannel(channel).toString() + channel;
+        return "信道: " + Util.getColorFromCargoChannel(channel).toString() + channel;
     }
 
     @Nonnull
@@ -183,7 +184,7 @@ public class HudController {
         Network cn = CargoNet.getNetworkFromLocation(request.getLocation());
 
         int size = getNetworkSize(cn);
-        return size < 0 ? "" : "Network Size: " + HudBuilder.getCommaNumber(size);
+        return size < 0 ? "" : "货运网络大小: " + HudBuilder.getCommaNumber(size);
     }
 
     private int getNetworkSize(Network network) {
@@ -250,7 +251,7 @@ public class HudController {
 
     /**
      * Register a custom handler for when a player looks at a Slimefun Item
-     * 
+     *
      * @param clazz   The class extending {@code SlimefunItem}
      * @param handler A function that takes a {@code HudRequest} and returns
      *                formatted text to be displayed on the WAILA HUD

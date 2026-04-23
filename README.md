@@ -1,36 +1,48 @@
 # SlimeHUD
 
-Adds a WAILA (What Am I Looking At) HUD for Slimefun items. Can be set to display in the bossbar or above the hotbar in `config.yml`. Additional energy/cargo information can also be toggled on or off in `config.yml`. Individual players can also toggle their WAILA HUD with `/slimehud toggle`.
+添加了 Slimefun 方块的 WAILA (我在看什么) 显示功能。  
+你可以直接获得你看向的方块的名称，不需要打开菜单，或是破坏方块。  
 
-The HUD lets you see what Slimefun item a block is without breaking or opening its menu. It also displays additional information depending on the block, such as network size, cargo channel, and energy generation. See the [wiki](https://schn.pages.dev/slimehud) for more details.
+可以在`config.yml`中设置使用BossBar或ActionBar显示。  
+额外的能源/货运网络信息也可以设置开启或关闭。
 
-## Preview
+玩家可以使用指令 `/slimehud toggle` 来切换 WAILA 的开关。
 
-<https://user-images.githubusercontent.com/101147426/182007545-474a6596-b4e2-4a92-bdab-c18ed2286a94.mp4>
+## 下载
+
+<p align="center">
+  <a href="https://builds.guizhanss.net/SlimefunGuguProject/SlimeHUD/master">
+    <img src="https://builds.guizhanss.net/f/SlimefunGuguProject/SlimeHUD/master/badge.svg" alt="Build status"/>
+  </a>
+</p>
+
+## 预览
+
+### BossBar 版本
+
+<https://user-images.githubusercontent.com/101147426/180625208-4713a843-e856-475e-ba83-95b5a61786f8.mp4>
+
+### ActionBar 版本
+
+https://user-images.githubusercontent.com/101147426/180625211-cbcfd01d-d418-4e6c-a8ab-55d938d7840e.mp4
 
 ## PlaceholderAPI
 
-- `%slimehud_toggle%` Returns the current player's toggle state. Possible values are `true` or `false`.
-- `%slimehud_hud%` Standard hud, including block display name and additional information.
-- `%slimehud_hud_block%` Only block display names.
-- `%slimehud_hud_block_info%` Only additional information.
+- `%slimehud_toggle%` 返回玩家是否已启用 SlimeHUD。`true` 或 `false`。
+- `%slimehud_hud%` 返回完整的的 HUD 显示文本，包含方块名称与额外信息
+- `%slimehud_hud_block%` 仅包含方块名称
+- `%slimehud_hud_block_info%` 仅包含额外信息
 
-## Limitations
+## 限制
 
-- Minecraft only has 7 colors for the bossbar, compared to 16 for regular items.
+- Minecraft 仅有7种颜色的 BossBar，而聊天文字颜色却有16种。
 
-## API
+## 需要
 
-API documentation can be found [here](https://schn.pages.dev/slimehud/api-usage) on the wiki.
-
-## Requirements
-
-- Spigot or its derivatives
-- Slimefun, of course
+- Spigot 或衍生服务端
+- Slimefun
 
 ## Credits
 
-Big thanks to Sefiraat for designing and creating the API!
-
-*InfinityLib* by Mooy1  
+*InfinityLib* by Mooy1
 *Lombok* by Project Lombok
