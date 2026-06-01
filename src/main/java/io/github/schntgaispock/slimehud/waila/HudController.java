@@ -100,7 +100,7 @@ public class HudController {
         MachineOperation operation = machine.getMachineProcessor().getOperation(request.getLocation());
 
         if (operation == null) {
-            hudText.append("空闲");
+            hudText.append("idle");
             if (request.getSlimefunItem() instanceof EnergyNetComponent) {
                 hudText.append(" ").append(processCapacitor(request));
             }
